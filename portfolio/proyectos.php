@@ -40,7 +40,7 @@ $url = "proyectos";
 					<div class="container pb-sm-15">
 						<div class="row justify-content-between mb-sm-15">
 							<a href="ventas.php" class="btn btn-md mb-3 ml-3" target="_blank">Ver online</a>						
-							<a href="#" class="btn" target="_blank">Código fuente</a>
+							<a href="https://github.com/Natzum/htdocs/blob/master/portfolio/ventas.php" class="btn" target="_blank">Código fuente</a>
 						</div>
 					</div>
 					</div>
@@ -66,7 +66,7 @@ $url = "proyectos";
 					<div class="container pb-sm-15">
 						<div class="row justify-content-between mb-sm-30">
 							<a href="../portfolio/login/login.php" target="blank" class="btn btn-md mb-3 ml-3" >Ver online</a>						
-							<a href="#" class="btn" target="blank">Código fuente</a>
+							<a href="https://github.com/Natzum/htdocs/tree/master/portfolio/login" class="btn" target="blank">Código fuente</a>
 						</div>
 					</div>
 					</div>
