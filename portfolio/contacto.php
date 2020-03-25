@@ -1,5 +1,7 @@
 <?php
 $url = "contacto"; 
+include_once("PHPMailer/src/PHPMailer.php");
+include_once("PHPMailer/src/SMTP.php");
 if($_POST){ /* es postback */
     $nombre = $_POST["txtNombre"];
     $correo = $_POST["txtCorreo"];
@@ -10,10 +12,10 @@ if($_POST){ /* es postback */
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->SMTPAuth = true;
-        $mail->Host = "mail.google.com"; // SMTP a utilizar
-        $mail->Username = "natalia.i.fores@gmail.com"; // Correo completo a utilizar
+        $mail->Host = "smtp.gmail.com"; // SMTP a utilizar
+        $mail->Username = "natalia.i.flores@gmail.com"; // Correo completo a utilizar
         $mail->Password = "siempre1vegan";
-        $mail->Port = 25;
+        $mail->Port = 465;
         $mail->From = "natalia.i.flores@gmail.com"; //Desde la cuenta donde enviamos
         $mail->FromName = "Natalia Flores";
         $mail->IsHTML(true);
@@ -27,7 +29,7 @@ if($_POST){ /* es postback */
 
         //Destinatarios
         $mail->addAddress($correo);
-        $mail->addBCC("danic305@gmail.com"); //Copia oculta
+        $mail->addBCC("natalia.i.flores@gmail.com"); //Copia oculta
         $mail->Subject = utf8_decode("Contacto página Web");
         $mail->Body = "Recibimos tu consulta, te responderemos a la brevedad.";
         if(!$mail->Send()){
@@ -36,7 +38,7 @@ if($_POST){ /* es postback */
         $mail->ClearAllRecipients(); //Borra los destinatarios
 
         //Envía ahora un correo a nosotros con los datos de la persona
-        $mail->addAddress("info@dominio.com.ar");
+        $mail->addAddress("natalia.i.flores@gmail.com");
         $mail->Subject = utf8_decode("Recibiste un mensaje desde tu página Web");
         $mail->Body = "Te escribio $nombre cuyo correo es $correo, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
        
