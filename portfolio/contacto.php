@@ -1,6 +1,55 @@
 <?php
 $url = "contacto"; 
+if($_POST){ /* es postback */
+    $nombre = $_POST["txtNombre"];
+    $correo = $_POST["txtCorreo"];
+    $asunto = $_POST["txtAsunto"];
+    $mensaje = $_POST["txtMensaje"];
 
+    if($nombre != "" && $correo != ""){
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->SMTPAuth = true;
+        $mail->Host = "mail.google.com"; // SMTP a utilizar
+        $mail->Username = "natalia.i.fores@gmail.com"; // Correo completo a utilizar
+        $mail->Password = "siempre1vegan";
+        $mail->Port = 25;
+        $mail->From = "natalia.i.flores@gmail.com"; //Desde la cuenta donde enviamos
+        $mail->FromName = "Natalia Flores";
+        $mail->IsHTML(true);
+        $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+
+        //Destinatarios
+        $mail->addAddress($correo);
+        $mail->addBCC("danic305@gmail.com"); //Copia oculta
+        $mail->Subject = utf8_decode("Contacto página Web");
+        $mail->Body = "Recibimos tu consulta, te responderemos a la brevedad.";
+        if(!$mail->Send()){
+            $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
+        }
+        $mail->ClearAllRecipients(); //Borra los destinatarios
+
+        //Envía ahora un correo a nosotros con los datos de la persona
+        $mail->addAddress("info@dominio.com.ar");
+        $mail->Subject = utf8_decode("Recibiste un mensaje desde tu página Web");
+        $mail->Body = "Te escribio $nombre cuyo correo es $correo, con el asunto $asunto y el siguiente mensaje:<br><br>$mensaje";
+       
+        if($mail->Send()){ /* Si fue enviado correctamente redirecciona */
+            header('Location: envio.php');
+        } else {
+            $msg = "Error al enviar el correo, intente nuevamente mas tarde.";
+        }    
+    } else {
+        $msg = "Complete todos los campos";
+    }
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -20,6 +69,7 @@ $url = "contacto";
     <title>Contacto</title>
 </head>
 <body>
+<form action="" method="POST"> 	
 	<header>
 	 	<?php include_once("menu.php");?>
 		
@@ -42,26 +92,26 @@ $url = "contacto";
 					<div class="row">
 						<div class="col-6">
 							<div class="form-group">
-								<input type="text" name="form-control" id="nombre" placeholder="NOMBRE" required="nombre" size="42">
+								<input type="text" name="txtNombre" id="nombre" placeholder="NOMBRE" required="nombre" size="42">
 							</div>
 						</div>
 						<div class="col-6">
 							<div class="form-group">
-								<input type="Email" name="form-control" id="txtEmail" placeholder="correo" required="Email" size="42">	
+								<input type="Email" name="txtCorreo" id="mail" placeholder="correo" required="Email" size="42">	
 							</div>							
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12">
 							<div class="form-group">
-								<input type="text" name="form-control" id="asunto" placeholder="asunto" size="90">
+								<input type="text" name="txtAsunto" id="asunto" placeholder="asunto" size="90">
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12">
 							<div class="form-group">
-								<textarea name="form-control" id="mensaje" cols="91" rows="10" placeholder="mensaje" required="mensaje" ></textarea> 
+								<textarea name="txtMensaje" id="mensaje" cols="91" rows="10" placeholder="mensaje" required="mensaje" ></textarea> 
 							</div>
 						</div>
 					</div>	
@@ -79,6 +129,6 @@ $url = "contacto";
 		<?php include_once("footer.php");?>
 		
 	</footer>
-	
+</form>	
 </body>
 </html>

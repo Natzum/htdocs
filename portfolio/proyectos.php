@@ -65,6 +65,19 @@ $url = "proyectos";
 					<p>Sistema de gestión de clientes, productos y ventas. Realizado en HTML, CSS, PHP, MVC, Bootstrap, Js, Ajax, jQuery y MySQL de base de datos.</p>
 					<div class="container pb-sm-15">
 						<div class="row justify-content-between mb-sm-30">
+							<a href="#" target="blank" class="btn btn-md mb-3 ml-3" >Ver online</a>						
+							<a href="#" class="btn" target="blank">Código fuente</a>
+						</div>
+					</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-12 pl-sm-4 pb-sm-15 mt-4 mt-sm-0" >
+					<div class="bg-white">
+					<img src="images/4.png" alt="Sistema de gestion" class="img-fluid">
+					<h3>Login</h3>
+					<p>Login, sesión, usuarios. <br> <br> <br> </p>
+					<div class="container pb-sm-15">
+						<div class="row justify-content-between mb-sm-30">
 							<a href="../portfolio/login/login.php" target="blank" class="btn btn-md mb-3 ml-3" >Ver online</a>						
 							<a href="https://github.com/Natzum/htdocs/tree/master/portfolio/login" class="btn" target="blank">Código fuente</a>
 						</div>
