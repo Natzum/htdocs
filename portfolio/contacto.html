@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700&display=swap" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script> <!-- para el menu de navegacion -->
+	<link rel="stylesheet" href="css/fontawesome/css/all.min.css">
+	<link rel="stylesheet" href="css/fontawesome/css/fontawesome.min.css">
+	<link rel="stylesheet" href="css/estilos.css">
+    <title>Contacto</title>
+</head>
+<body>
+	<header>
+	 	<nav class="navbar navbar-expand-md navbar-dark">
+ 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+  			<span class="navbar-toggler-icon"></span>
+ 			</button>
+
+ 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+ 			 	<ul class="navbar-nav mr-auto">
+  		  			<li class="nav-item ">
+        				<a class="nav-link" href="index.html" title="Ir a inicio">Inicio <span class="sr-only">(current)</span></a>
+     	   		 	</li>
+       	   
+       	   		 	<li class="nav-item ">
+           				<a class="nav-link" href="sobre-mi.html" title="Sobre mi">Sobre mi <span class="sr-only">(current)</span></a>
+            		</li>
+          
+           			<li class="nav-item">
+           				<a class="nav-link" href="proyectos.html" title="Ver mis proyectos">Proyectos <span class="sr-only">(current)</span></a>
+            		</li>
+          
+           		 	<li class="nav-item active">
+           				<a class="nav-link" href="#" title="Contacto">Contacto <span class="sr-only">(current)</span></a>
+           		 	</li>
+          		</ul>
+ 	   		</div>
+	    </nav>
+		
+	</header>
+	<section id="contacto">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 my-5">
+				<h1>¡Trabajemos juntos!</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<p>Para más detalles sobre mi trabajo podés ver mi <a href="https://www.linkedin.com/in/natalia-in%C3%A9s-flores-8a192b176/" target="blank">Linkedin</a>, <br>descargar mi<a href="curriculum.pdf" class="btn btn-md" target="_blank">CV</a> o mandarme <br>un mensaje.</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-10">
+				<form action="" method="POST">
+					<div class="row">
+						<div class="col-6">
+							<div class="form-group">
+								<input type="text" name="form-control" id="nombre" placeholder="NOMBRE" required="nombre" size="42">
+							</div>
+						</div>
+						<div class="col-6">
+							<div class="form-group">
+								<input type="Email" name="form-control" id="txtEmail" placeholder="correo" required="Email" size="42">	
+							</div>							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<input type="text" name="form-control" id="asunto" placeholder="asunto" size="90">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="form-group">
+								<textarea name="form-control" id="mensaje" cols="91" rows="10" placeholder="mensaje" required="mensaje" ></textarea> 
+							</div>
+						</div>
+					</div>	
+					<div class="row">
+						<div>									
+               				<input type="submit" value="Enviar" id="btnEnviar" name="btnEnviar" class="boton"></input>
+               			</div>																		
+					</div>
+				</form>
+			</div>
+	   </div>
+	</div>	
+	</section>
+	<footer>
+		<div class="container">
+			<div class="row ">
+				<div class="col-4">
+					<a href="index.html" class="pie" target="blanks">©Todos los derechos reservados <br>2020</a>
+				</div>
+			    <div class="col-4 text-center">
+						<a href="https://api.whatsapp.com/send?phone=542215755823&text=Hola" target="blank">
+							<i class="fab fa-whatsapp"></i>
+						</a>
+						<a href="https://www.linkedin.com/in/natalia-in%C3%A9s-flores-8a192b176/" target="blank">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
+						<a href="https://github.com/Natzum" target="blank">
+							<i class="fab fa-github"></i>
+						</a>
+				</div>
+				<div class="col-4 text-right">
+					<span>Patrocinado por</span><br> 
+					<a href="https://depcsuite.com" class="pie"target="blank">DePC Suite</a>
+				</div>
+				
+			</div>	
+		</div>
+		
+	</footer>
+	
+</body>
+</html>
