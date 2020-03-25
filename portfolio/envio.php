@@ -25,9 +25,25 @@
     background-size: 110%;
     min-height: 550px;
 	}
+	h1{
+		padding-top: 200px;
+		padding-left: 100px;
+	} 
+	h2{
+		padding-left: 150px;
+	}
 </style>
 <body>
-	<h1>Su consulta ha sido enviada</h1>
-	<h2>Revise su correo electrónico</h2>
+	<div class="container">
+		<h1>Su consulta ha sido enviada</h1>
+		<h2>Revise su correo electrónico</h2>
+	</div>
+	<form action="index.php"> 
+	<div class="row">
+        <div class="col-12">
+            <input type="submit" value="Volver" class="btn btn-primary" style="position: fixed;bottom: 100px;right: 40px;" >
+        </div>
+    </div>
+    </form>
 </body>
 </html>

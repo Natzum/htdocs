@@ -150,7 +150,6 @@ section.contacto{
 
 /*INPUT*/
 input, textarea	{
-	text-transform: uppercase;
 	background-color: #E8E9FC;
 	border: 0;
 	border-bottom: 1px solid;
@@ -162,7 +161,7 @@ input, textarea	{
 /*BOTON*/
 .boton 	{
 	background-color: black;
-	color: #eeeeee;
+	color: #E8E9FC;
 	margin-left: 410px;
 	margin-bottom: 30px;
 	padding: 0px 15px;
@@ -172,7 +171,7 @@ input, textarea	{
 }
 
 .boton:hover{  
-    background-color: #eeeeee;
+    background-color: #E8E9FC;
     color: black;
     border: 1px solid;
 }

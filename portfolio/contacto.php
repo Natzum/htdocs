@@ -15,9 +15,9 @@ if($_POST){ /* es postback */
         $mail->Host = "smtp.gmail.com"; // SMTP a utilizar
         $mail->Username = "natalia.i.flores@gmail.com"; // Correo completo a utilizar
         $mail->Password = "siempre1vegan";
-        $mail->Port = 465;
-        $mail->From = "natalia.i.flores@gmail.com"; //Desde la cuenta donde enviamos
-        $mail->FromName = "Natalia Flores";
+        $mail->Port = 587;
+        $mail->From = "natalia.i.flores@gmail.com";//Desde la cuenta donde enviamos
+        $mail->FromName = "Natalia Flores"; 
         $mail->IsHTML(true);
         $mail->SMTPOptions = array(
                     'ssl' => array(
@@ -99,27 +99,27 @@ if($_POST){ /* es postback */
 						</div>
 						<div class="col-6">
 							<div class="form-group">
-								<input type="Email" name="txtCorreo" id="mail" placeholder="correo" required="Email" size="42">	
+								<input type="Email" name="txtCorreo" id="mail" placeholder="CORREO" required="Email" size="42">	
 							</div>							
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12">
 							<div class="form-group">
-								<input type="text" name="txtAsunto" id="asunto" placeholder="asunto" size="90">
+								<input type="text" name="txtAsunto" id="asunto" placeholder="ASUNTO" size="90">
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-12">
 							<div class="form-group">
-								<textarea name="txtMensaje" id="mensaje" cols="91" rows="10" placeholder="mensaje" required="mensaje" ></textarea> 
+								<textarea name="txtMensaje" id="mensaje" cols="91" rows="10" placeholder="MENSAJE" required="mensaje" ></textarea> 
 							</div>
 						</div>
 					</div>	
 					<div class="row">
 						<div>									
-               				<input type="submit" value="Enviar" id="btnEnviar" name="btnEnviar" class="boton"></input>
+               				<input type="submit" value="ENVIAR" id="btnEnviar" name="btnEnviar" class="boton"></input>
                			</div>																		
 					</div>
 				</form>
