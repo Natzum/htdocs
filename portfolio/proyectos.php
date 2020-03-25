@@ -1,3 +1,8 @@
+<?php
+$url = "proyectos"; 
+
+
+?>
 <!DOCTYPE html>
 <html lang="ES">
 <head>
@@ -16,31 +21,7 @@
 </head>
 <body>
 	<header>
-	    <nav class="navbar navbar-expand-md navbar-dark">
- 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-  			<span class="navbar-toggler-icon"></span>
- 			</button>
-
- 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
- 			 	<ul class="navbar-nav mr-auto">
-  		  			<li class="nav-item ">
-        				<a class="nav-link" href="index.html" title="Ir a inicio">Inicio <span class="sr-only">(current)</span></a>
-     	   		 	</li>
-       	   
-       	   		 	<li class="nav-item ">
-           				<a class="nav-link" href="sobre-mi.html" title="Sobre mi">Sobre mi <span class="sr-only">(current)</span></a>
-            		</li>
-          
-           			<li class="nav-item active">
-           				<a class="nav-link" href="#" title="Ver mis proyectos">Proyectos <span class="sr-only">(current)</span></a>
-            		</li>
-          
-           		 	<li class="nav-item ">
-           				<a class="nav-link" href="contacto.html" title="Contacto">Contacto <span class="sr-only">(current)</span></a>
-           		 	</li>
-          		</ul>
- 	   		</div>
-	    </nav>
+	    <?php include_once("menu.php");?>
 	</header>
 	<section class="proyectos" id="proyectos">
 		<div class="container">
@@ -54,7 +35,7 @@
 				<div class="col-sm-6 col-12 pr-sm-4 pb-sm-15 mt-4 mt-sm-0">
 					<div class="bg-white">
 					<img src="images/1.png" alt="ABM Ventas" class="img-fluid">
-					<h3>ABM Ventas</h3>
+					<h3>ABM Clientes</h3>
 					<p>Alta, Baja, modificación de un registro de clientes empleando:. Realizado en HTML, CSS, PHP, Bootstrap y Json.</p>
 					<div class="container pb-sm-15">
 						<div class="row justify-content-between mb-sm-15">
@@ -84,7 +65,7 @@
 					<p>Sistema de gestión de clientes, productos y ventas. Realizado en HTML, CSS, PHP, MVC, Bootstrap, Js, Ajax, jQuery y MySQL de base de datos.</p>
 					<div class="container pb-sm-15">
 						<div class="row justify-content-between mb-sm-30">
-							<a href="../login/login.php" target="blank" class="btn btn-md mb-3 ml-3" >Ver online</a>						
+							<a href="../portfolio/login/login.php" target="blank" class="btn btn-md mb-3 ml-3" >Ver online</a>						
 							<a href="#" class="btn" target="blank">Código fuente</a>
 						</div>
 					</div>
@@ -95,29 +76,7 @@
 		</div>	
 	</section>
 	<footer>
-		<div class="container">
-			<div class="row ">
-				<div class="col-4">
-					<a href="index.html" class="pie" target="blanks">©Todos los derechos reservados <br>2020</a>
-				</div>
-			    <div class="col-4 text-center">
-						<a href="https://api.whatsapp.com/send?phone=542215755823&text=Hola" target="blank">
-							<i class="fab fa-whatsapp"></i>
-						</a>
-						<a href="https://www.linkedin.com/in/natalia-in%C3%A9s-flores-8a192b176/" target="blank">
-							<i class="fab fa-linkedin-in"></i>
-						</a>
-						<a href="https://github.com/Natzum" target="blank">
-							<i class="fab fa-github"></i>
-						</a>
-				</div>
-				<div class="col-4 text-right">
-					<span>Patrocinado por</span><br> 
-					<a href="https://depcsuite.com" class="pie"target="blank">DePC Suite</a>
-				</div>
-				
-			</div>	
-		</div>
+		<?php include_once("footer.php");?>
 	</footer>
 	
 </body>
