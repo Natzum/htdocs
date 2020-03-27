@@ -32,6 +32,17 @@
 	h2{
 		padding-left: 150px;
 	}
+	@media (max-width: 700px) {
+		body{
+			background-image: url('images/fondo_2.png')!important;}
+		h1{
+			padding-top: 20px;
+			padding-left: 10px;
+		}
+		h2{
+			padding-left: 15px;
+		}
+	}
 </style>
 <body>
 	<div class="container">
