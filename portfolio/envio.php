@@ -49,7 +49,7 @@
 		<h1>Su consulta ha sido enviada</h1>
 		<h2>Revise su correo electrónico</h2>
 	</div>
-	<form action="index.php"> 
+	<form action="index.php"> s
 	<div class="row">
         <div class="col-12">
             <input type="submit" value="Volver" class="btn btn-primary" style="position: fixed;bottom: 100px;right: 40px;" >

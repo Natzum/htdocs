@@ -1,8 +1,8 @@
 
 
 <nav class="navbar navbar-expand-sm navbar-dark">
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation" >
-            <span class="navbar-toggler-icon" style=" position: relative;left: -30px; border: 1px solid #7084E8 !important; width: 45px;height: 37px;border-radius: 3px; background-color: #7084E8!important;"></span>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation" style="position: relative;left: -30px;">
+            <span class="navbar-toggler-icon" style="border: 1px solid #7084E8 !important; width: 45px;height: 37px;border-radius: 3px; background-color: #7084E8!important;"></span>
             </button>
 
             <div class="navbar-collapse collapse" id="navbarsExampleDefault">

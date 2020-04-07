@@ -2,12 +2,12 @@
 session_start();
 
 
-$_SESSION["clave"]="admin123";
-$clave=password_hash("admin123", PASSWORD_DEFAULT);
+//$_SESSION["clave"]="admin123";
+//$clave=password_hash("admin123", PASSWORD_DEFAULT);
 
 if($_POST){
-  $usuario =$_POST["txtUsuario"];
-  $contra =$_POST["txtClave"];
+  //$usuario =$_POST["txtUsuario"];
+  //$contra =$_POST["txtClave"];
   if (password_verify($contra, $clave)&&($usuario=="admin")){
     $_SESSION["nombre"]="Natalia Flores";
     header('Location: index.php');
@@ -85,7 +85,7 @@ if($_POST){
                     <a class="small" href="forgot-password.html">¿Olvidaste la clave?</a>
                   </div>
                   <div class="text-center">
-                    <a class="small" href="register.html">Crear una cuenta nueva!</a>
+                    <a class="small" href="register.php">Crear una cuenta nueva!</a>
                   </div>
                 </div>
               </div>
