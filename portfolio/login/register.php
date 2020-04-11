@@ -4,20 +4,26 @@ include_once "config.php";
 include_once "usuario.php";
 
 $usuario = new Usuario();
+$usComparativo = new Usuario();
 $usuario->cargarFormulario($_REQUEST);
+$usComparativo->nom_usuario = $usuario->nom_usuario;
 if($_POST){
     if(isset($_POST["btnRegistrar"])){
-            $usuario->insertar();
-            header('Location: login.php');
+            $usComparativo->obtenerPorNom();
+            if ($usComparativo->idusuario <> "") {
+              //cartel de nombre de usuario ya existente
+              $msj2= "Nombre de usuario existente, busque otro";
+            }else{
+              $usuario->insertar();
+              //cartel de confirmacion de registro, con el ok sigue a login.php');
+              $msj= "Su usuario ha sido registrado, puede ir al login";
+            }         
         }
 } 
 
-
-
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -27,7 +33,7 @@ if($_POST){
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Register</title>
+  <title>Registro de Usuarios</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -54,7 +60,12 @@ if($_POST){
                 <h1 class="h4 text-gray-900 mb-4">Crear una cuenta!</h1>
               </div>
               <form class="user">
+                <?php if (isset($msj)):?>
+                        <div class="p-3 mb-2 bg-info text-white"> <?php echo"$msj"?>
+                    </div><?php endif; ?>
                 <div class="form-group row">
+                  <?php if (isset($msj2)):?>
+                    <div class="p-3 mb-2 bg-danger text-white"> <?php echo"$msj2"?></div><?php endif; ?>
                   <div class="col-sm-6 mb-3 mb-sm-0">
                     <input type="text" class="form-control form-control-user" id="txtNombre" name="txtNombre" placeholder="Nombre">
                   </div>

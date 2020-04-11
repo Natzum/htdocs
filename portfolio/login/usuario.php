@@ -60,7 +60,7 @@ class Usuario {
     }
     public function obtenerPorNom(){
         $mysqli = new mysqli(Config::BBDD_HOST, Config::BBDD_USUARIO, Config::BBDD_CLAVE, Config::BBDD_NOMBRE);
-        $sql = "SELECT idusuario, nombre, apellido, clave, correo, nom_usuario, fecha_ultloguin FROM usuarios WHERE nom_usuario = " . $this->nom_usuario;
+        $sql = "SELECT idusuario, nombre, apellido, clave, correo, nom_usuario, fecha_ultloguin FROM usuarios WHERE nom_usuario =  '".$this->nom_usuario."'";
         $resultado = $mysqli->query($sql);
 
         if($resultado){

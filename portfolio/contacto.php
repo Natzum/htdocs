@@ -15,9 +15,9 @@ if($_POST){ /* es postback */
         $mail->Host = "smtp.sendgrid.net"; // SMTP a utilizar
         $mail->SMTPSecure = 'tls';
         $mail->Username = "apikey"; // Correo completo a utilizar
-        $mail->Password = "SG.fCL3eCgRTDCPrgyX3ir5YQ.zKLQJyq0LYGVeyXqlfa8rSdsfCUKrcVpCFLlR0LV5H0";
+        $mail->Password = "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";
         $mail->Port = 587;
-        $mail->From = "natalia.i.flores@gmail.com";//Desde la cuenta donde enviamos
+        $mail->From = "info.nataliaflores@gmail.com";//Desde la cuenta donde enviamos
         $mail->FromName = "Natalia Flores"; 
         $mail->IsHTML(true);
         $mail->SMTPOptions = array(
@@ -30,7 +30,7 @@ if($_POST){ /* es postback */
 
         //Destinatarios
         $mail->addAddress($correo);
-        $mail->addBCC("natalia.i.flores@gmail.com"); //Copia oculta
+        $mail->addBCC("info.nataliaflores@gmail.com"); //Copia oculta
         $mail->Subject = utf8_decode("Contacto página Web");
         $mail->Body = "Recibimos tu consulta, te responderemos a la brevedad.";
         if(!$mail->Send()){

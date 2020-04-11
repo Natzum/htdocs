@@ -1,16 +1,9 @@
 <?php
 include_once "config.php";
-include_once "venta.php";
-include_once "cliente.php";
-include_once "producto.php";
-
-$venta = new Venta();
-$aVentas = $venta->obtenerTodos();
-$cliente = new Cliente();
-$producto = new Producto();
+include_once  "tipoproducto.php";
+$tproducto = new TipoProducto();
+$atProductos = $tproducto->obtenerTodos();
 session_start();
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +16,7 @@ session_start();
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ventas</title>
+  <title>Tipos de Productos</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -209,41 +202,24 @@ session_start();
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="container">
-            <div class="row">
-              <div class="col-12 text-center">
-                <h1>Listado de ventas</h1>
-              </div>
-            </div>
-              <div class="col-12">
-                <table class="table table-hover">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Fecha</th>            
-                    <th>Cliente</th>            
-                    <th>Producto</th>          
-                    <th>Importe</th>  
-                    <th>Editar</th>        
-                  </tr>
-                  <?php foreach ($aVentas as $venta): ?>
-                    <tr>
-                      <th><?php echo $venta->idventa ?></th>
-                      <td><?php echo $venta->fecha; ?></td>
-                      <td><?php $cliente->idcliente = $venta->fk_idcliente; $cliente->obtenerPorId(); echo $cliente->nombre ?></td>
-                      <td><?php $producto->idproducto = $venta->fk_idproducto; $producto->obtenerPorId(); echo $producto->nombre ?></td>
-                      <td><?php echo "$ $venta->importe"; ?></td>
-                      <td><a href="ventas_formulario.php?id=<?php echo $venta->idventa; ?>"><i class="fas fa-marker"></i></a></td>
-                    </tr>
-                  <?php endforeach; ?>
-                </table>
-              </div>  
-            </div>
+          <h1 class="h3 mb-4 text-gray-800">Listado de tipo de productos</h1>
+          <div class="row">
+          	<div class="col-12 mb-3">
+          	<a href="tipoproducto_formulario.php" class="btn btn-primary mr-2">Nuevo</a> </div>   	
           </div>
-
-          </div>  
-
-        </div>
+          <table class="table table-hover border">
+            <tr>
+                <th>Nombre</th>
+                <th>Editar</th>
+            </tr>
+            <?php foreach ($atProductos as $producto): ?>
+              <tr>
+                  <td><?php echo $producto->nombre; ?></td>
+                  <td><a href="tipoproducto_formulario.php?id=<?php echo $producto->idtipoproducto; ?>"><i class="fas fa-marker"></i></a></td>
+              </tr>
+            <?php endforeach; ?>
+          </table>
+        </div>    
         <!-- /.container-fluid -->
 
       </div>

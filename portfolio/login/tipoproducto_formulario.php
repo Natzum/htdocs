@@ -1,14 +1,30 @@
 <?php
 include_once "config.php";
-include_once "venta.php";
-include_once "cliente.php";
-include_once "producto.php";
-
-$venta = new Venta();
-$aVentas = $venta->obtenerTodos();
-$cliente = new Cliente();
-$producto = new Producto();
+include_once "tipoproducto.php";
 session_start();
+$tproducto = new TipoProducto();
+$tproducto->cargarFormulario($_REQUEST);
+
+if($_POST){
+  
+    if(isset($_POST["btnGuardar"])){
+     if(isset($_GET["id"]) && $_GET["id"] > 0){
+              //Actualizo un cliente existente
+              $tproducto->actualizar();
+        } else {
+            //Es nuevo
+            $tproducto->insertar();
+        }
+    } else if(isset($_POST["btnBorrar"])){
+        $tproducto->eliminar();
+    }
+} 
+if(isset($_GET["id"]) && $_GET["id"] > 0){
+    $tproducto->obtenerPorId();
+}
+
+
+
 
 
 ?>
@@ -23,7 +39,7 @@ session_start();
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Ventas</title>
+  <title>Nuevo tipo de Producto</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -209,41 +225,25 @@ session_start();
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="container">
+          <form action="" method="POST">
+            <h1 class="h3 mb-4 text-gray-800">Tipo de Productos</h1>
             <div class="row">
-              <div class="col-12 text-center">
-                <h1>Listado de ventas</h1>
-              </div>
+                <div class="col-12 mb-3">
+                    <a href="tipoproducto_formulario.php" class="btn btn-primary mr-2">Nuevo</a>
+                    <button type="submit" class="btn btn-success mr-2" id="btnGuardar" name="btnGuardar">Guardar</button>
+                    <button type="submit" class="btn btn-danger" id="btnBorrar" name="btnBorrar">Borrar</button>
+                </div>
             </div>
-              <div class="col-12">
-                <table class="table table-hover">
-                  <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Fecha</th>            
-                    <th>Cliente</th>            
-                    <th>Producto</th>          
-                    <th>Importe</th>  
-                    <th>Editar</th>        
-                  </tr>
-                  <?php foreach ($aVentas as $venta): ?>
-                    <tr>
-                      <th><?php echo $venta->idventa ?></th>
-                      <td><?php echo $venta->fecha; ?></td>
-                      <td><?php $cliente->idcliente = $venta->fk_idcliente; $cliente->obtenerPorId(); echo $cliente->nombre ?></td>
-                      <td><?php $producto->idproducto = $venta->fk_idproducto; $producto->obtenerPorId(); echo $producto->nombre ?></td>
-                      <td><?php echo "$ $venta->importe"; ?></td>
-                      <td><a href="ventas_formulario.php?id=<?php echo $venta->idventa; ?>"><i class="fas fa-marker"></i></a></td>
-                    </tr>
-                  <?php endforeach; ?>
-                </table>
-              </div>  
+            <div class="row">
+                <div class="col-6 form-group">
+                    <label for="txtNombre">Nombre:</label>
+                    <input type="text" required class="form-control" name="txtNombre" id="txtNombre" value="<?php echo $tproducto->nombre ?>">
+                </div>
             </div>
-          </div>
-
-          </div>  
 
         </div>
+          </form>
+         </div> 
         <!-- /.container-fluid -->
 
       </div>

@@ -40,7 +40,7 @@ class Carrito
 	public function __construct()
 	{
 		$this->cliente = new Cliente();
-		$this->aProductos=[];
+		$this->aProductos = array();
 		$this->total = 0.0;
 	}
 	public function __get($propiedad){
@@ -64,6 +64,10 @@ class Carrito
 			$sumador = $sumador + $producto->precio;
 		}
 		$this->total = $sumador;
+	}
+	public function setProducto($producto){
+		$this->aProductos[] = $producto;
+		$this->total += $producto->precio;
 	}
 }
 
@@ -123,9 +127,12 @@ $producto2->imprimir();
 
 $carrito = new Carrito();
 $carrito->cliente = $cliente1;
-$carrito->aProductos = [$producto1,$producto2];
-//$carrito->aProductos[1] = $producto2;
-$carrito->sumarizarTotal();
+//$carrito->aProductos = [$producto1,$producto2];
+$carrito->setProducto($producto1);
+$carrito->setProducto($producto2);
+//$carrito->aProductos[0] = $producto2;
+
+//array_push($carrito->aProductos, $producto2); 
 $carrito->imprimir();
 
 ?>

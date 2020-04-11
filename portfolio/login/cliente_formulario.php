@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once "config.php";
 include_once "cliente.php";
 
@@ -6,7 +7,6 @@ $cliente = new Cliente();
 $cliente->cargarFormulario($_REQUEST);
 
 if($_POST){
-  
     if(isset($_POST["btnGuardar"])){
      if(isset($_GET["id"]) && $_GET["id"] > 0){
               //Actualizo un cliente existente
@@ -17,8 +17,9 @@ if($_POST){
         }
     } else if(isset($_POST["btnBorrar"])){
         $cliente->eliminar();
-    }
+    } 
 } 
+
 if(isset($_GET["id"]) && $_GET["id"] > 0){
     $cliente->obtenerPorId();
 }
@@ -46,7 +47,7 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
 </head>
 
 <body id="page-top">
-
+ <form action="" method="POST"> 
   <!-- Page Wrapper -->
   <div id="wrapper">
 
@@ -209,32 +210,7 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
+            <?php include_once "profile_us.php"; ?>
 
           </ul>
 
@@ -245,11 +221,10 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <form action="" method="POST">
             <h1 class="h3 mb-4 text-gray-800">Cliente</h1>
             <div class="row">
                 <div class="col-12 mb-3">
-                    <a href="cliente-formulario.php" class="btn btn-primary mr-2">Nuevo</a>
+                    <a href="cliente_formulario.php" class="btn btn-primary mr-2">Nuevo</a>
                     <button type="submit" class="btn btn-success mr-2" id="btnGuardar" name="btnGuardar">Guardar</button>
                     <button type="submit" class="btn btn-danger" id="btnBorrar" name="btnBorrar">Borrar</button>
                 </div>
@@ -278,7 +253,6 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
             </div>
 
         </div>
-          </form>
          </div> 
         <!-- /.container-fluid -->
 
@@ -296,23 +270,7 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <?php include_once("logout.php")?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -323,7 +281,7 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
-
+</form>
 </body>
 
 </html>

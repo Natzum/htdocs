@@ -4,9 +4,9 @@
       <!-- Sidebar - Brand -->
       <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+          <i class="fas fa-credit-card"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">ABM Registros </div>
+        <div class="sidebar-brand-text mx-3">ABM Ventas </div>
       </a>
 
       <!-- Divider -->
@@ -16,7 +16,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="index.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Tablero</span></a>
+          <span>Inicio</span></a>
       </li>
 
       <!-- Divider -->
@@ -24,7 +24,7 @@
 
       <!-- Heading -->
       <div class="sidebar-heading">
-        Interface
+        Administración
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
@@ -51,17 +51,13 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="producto_formulario.php">Nuevo producto</a>
             <a class="collapse-item" href="productos.php">Listado de productos</a>
+            <a class="collapse-item" href="tipoproductos.php">Tipo de productos</a>
           </div>
         </div>
       </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        Addons
-      </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">

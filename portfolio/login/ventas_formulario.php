@@ -1,3 +1,35 @@
+<?php
+include_once "config.php";
+include_once "producto.php";
+include_once "cliente.php";
+include_once "venta.php";
+session_start();
+$producto = new Producto();
+$aProductos = $producto->obtenerTodos();
+$cliente = new Cliente();
+$aClientes = $cliente->obtenerTodos();
+$venta = new Venta();
+$venta->cargarFormulario($_REQUEST);
+
+
+if($_POST){ 
+    if(isset($_POST["btnGuardar"])){
+     if(isset($_GET["id"]) && $_GET["id"] > 0){
+              //Actualizo un cliente existente
+              $venta->actualizar();
+        } else {
+            //Es nuevo
+            $venta->insertar();
+        }
+    } else if(isset($_POST["btnBorrar"])){
+        $venta->eliminar();
+    }
+} 
+if(isset($_GET["id"]) && $_GET["id"] > 0){
+    $venta->obtenerPorId();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,6 +53,7 @@
 </head>
 
 <body id="page-top">
+<form action="" method="POST"> 
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -184,32 +217,7 @@
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
+            <?php include_once "profile_us.php"; ?>
 
           </ul>
 
@@ -220,56 +228,66 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <div class="container">
             <div class="row">
               <div class="col-12 text-center">
                 <h1>Registro de ventas</h1>
               </div>
             </div>
             <div class="row">
-              <div class="col-6">
-                <form action="" method="POST">
-                  <div class="row">
-                    <div class="col-12 form-group">
-                      <label for="txtFecha">Fecha:</label>
-                      <input type="date" required class="form-control" name="txtFecha" id="txtNtxtFechaombre" value="2020-04-01">
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 form-group">
-                      <label for="lstCliente">Cliente:</label>
-                      <select required class="form-control" name="lstCliente" id="lstCliente">
-                        <option disabled selected value="">Seleccionar</option>
-                        <option value="41">Nuevo Nombre</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 form-group">
-                      <label for="lstProducto">Producto:</label>
-                      <select required class="form-control" name="lstProducto" id="lstProducto">
-                          <option disabled selected value="">Seleccionar</option>
-                          <option value='1'></option>              
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 form-group">
-                      <label for="txtCorreo">Importe:</label>
-                      <input type="text" class="form-control" name="txtImporte" id="txtImporte" value="0" />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 form-group">
-                      <input type="submit" class="btn btn-primary" name="btnInsertar" id="btnInsertar" value="Insertar">
-                      <a href="index.php" class="btn btn-secondary">Limpiar</a>
-                      <input type="submit" class="btn btn-danger" name="btnBorrar" id="btnInsertar" value="Borrar">
-                      <input type="submit" class="btn btn-success" name="btnActualizar" id="btnInsertar" value="Actualizar">
-                  </div>
-                </form>
-              </div>  
+                <div class="col-12 mb-3">
+                    <a href="ventas_formulario.php" class="btn btn-primary mr-2">Nuevo</a>
+                    <button type="submit" class="btn btn-success mr-2" id="btnGuardar" name="btnGuardar">Guardar</button>
+                    <button type="submit" class="btn btn-danger" id="btnBorrar" name="btnBorrar">Borrar</button>
+                </div>
             </div>
-          </div>  
+            <div class="row">
+                <div class="col-12 form-group">
+                    <label for="txtFecha">Fecha:</label>
+                    <input type="date" required class="form-control" name="txtFecha" id="txtNtxtFechaombre" value="2020-04-01">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 form-group">
+                    <label for="txtCliente">Cliente:</label>
+                    <select name="lstCliente" id="lstCliente" class="form-control">
+                        <option value="" disabled selected>Seleccionar</option>
+                        <?php foreach ($aClientes as $cliente): ?> 
+                          <?php if($venta->fk_idcliente == $cliente->idcliente):?>
+                            <option selected value="<?php echo $cliente->idcliente; ?>"> <?php echo $cliente->nombre; ?></option>
+                          <?php else: ?>   
+                            <option value="<?php echo $cliente->idcliente; ?>"> <?php echo $cliente->nombre; ?></option>
+                          <?php endif; ?>  
+                        <?php endforeach; ?>
+                    </select>
+                </div>               
+                <div class="col-6 form-group">
+                    <label for="txttProducto">Producto:</label>
+                    <select name="lstTipoProducto" id="lstTipoProducto" class="form-control">
+                        <option value="" disabled selected>Seleccionar</option>
+                        <?php foreach ($aProductos as $producto): ?> 
+                          <?php if($venta->fk_idproducto == $producto->idproducto):?>
+                            <option selected value="<?php echo $producto->idproducto; ?>"> <?php echo $producto->nombre; ?></option>
+                          <?php else: ?>  
+                            <option value="<?php echo $producto->idproducto; ?>"> <?php echo $producto->nombre; ?></option>
+                          <?php endif; ?> 
+                        <?php endforeach; ?>
+                    </select>
+                </div>      
+            </div>
+            <div class="row">
+                <div class="col-4 form-group">
+                    <label for="txtImporte">Importe: $</label>
+                    <input type="number" step="any" class="form-control" name="txtImporte" id="txtImporte" value="<?php echo $venta->importe ?>" >
+                </div>
+                <div class="col-4 form-group">
+                    <label for="txtCantidad">Cantidad:</label>
+                    <input type="number" required class="form-control" name="txtCantidad" id="txtCantidad" value="<?php echo $venta->cantidad ?>" maxlength="11">
+                </div> 
+                <div class="col-4 form-group">
+                    <label for="txtPrecioU">Precio Unitario: $</label>
+                    <input type="number" step="any" required class="form-control" name="txtPrecioU" id="txtPrecioU" value="<?php echo $venta->preciounitario ?>" maxlength="11">
+                </div>  
+            
         </div>
         <!-- /.container-fluid -->
 
@@ -288,23 +306,7 @@
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <?php include_once("logout.php")?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -315,7 +317,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
-
+</form>
 </body>
 
 </html>

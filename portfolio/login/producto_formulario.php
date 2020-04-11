@@ -1,13 +1,18 @@
 <?php
 include_once "config.php";
 include_once "producto.php";
+include_once "tipoproducto.php";
+session_start();
 
 $producto = new Producto();
 $producto->cargarFormulario($_REQUEST);
+$tipoproducto = new TipoProducto();
+$aTipoproductos = $tipoproducto->obtenerTodos();
 
 if($_POST){
   
     if(isset($_POST["btnGuardar"])){
+     $producto->descripcion = $_POST[ 'content' ]; 
      if(isset($_GET["id"]) && $_GET["id"] > 0){
               //Actualizo un cliente existente
               $producto->actualizar();
@@ -42,6 +47,8 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <script src="[ckeditor-build-path]/ckeditor.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
 
 </head>
 
@@ -209,32 +216,7 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
             <div class="topbar-divider d-none d-sm-block"></div>
 
             <!-- Nav Item - User Information -->
-            <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-                <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
-              </div>
-            </li>
+            <?php include_once "profile_us.php"; ?>
 
           </ul>
 
@@ -246,10 +228,10 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
 
           <!-- Page Heading -->
           <form action="" method="POST">
-            <h1 class="h3 mb-4 text-gray-800">Producto</h1>
+            <h1 class="h3 mb-4 text-gray-800">Productos</h1>
             <div class="row">
                 <div class="col-12 mb-3">
-                    <a href="cliente_formulario.php" class="btn btn-primary mr-2">Nuevo</a>
+                    <a href="producto_formulario.php" class="btn btn-primary mr-2">Nuevo</a>
                     <button type="submit" class="btn btn-success mr-2" id="btnGuardar" name="btnGuardar">Guardar</button>
                     <button type="submit" class="btn btn-danger" id="btnBorrar" name="btnBorrar">Borrar</button>
                 </div>
@@ -258,18 +240,48 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
                 <div class="col-6 form-group">
                     <label for="txtNombre">Nombre:</label>
                     <input type="text" required class="form-control" name="txtNombre" id="txtNombre" value="<?php echo $producto->nombre ?>">
-                </div>
+                </div>   
                 <div class="col-6 form-group">
+                  <label for="txttProducto">Tipo de producto:</label>
+                  <select name="lstTipoProducto" id="lstTipoProducto" class="form-control">
+                    <option value="" disabled selected>Seleccionar</option>
+                    <?php foreach ($aTipoproductos as $tipo): ?>
+                      <?php if($producto->fk_idtipoproducto == $tipo->idtipoproducto):?>
+                        <option selected value="<?php echo $tipo->idtipoproducto; ?>"> <?php echo $tipo->nombre; ?></option>
+                      <?php else: ?>  
+                        <option value="<?php echo $tipo->idtipoproducto; ?>"> <?php echo $tipo->nombre; ?></option>
+                      <?php endif; ?>  
+                    <?php endforeach; ?>
+                  </select>
+                </div>
+            </div>
+            <div class="row">    
+                <div class="col-2 form-group">
                     <label for="txtCantidad">Cantidad:</label>
                     <input type="number" required class="form-control" name="txtCantidad" id="txtCantidad" value="<?php echo $producto->cantidad ?>" maxlength="11">
                 </div>
-                <div class="col-6 form-group">
-                    <label for="txtPrecio">Precio:</label>
-                    <input type="number" class="form-control" name="txtPrecio" id="txtPrecio" value="<?php echo $producto->precio ?>">
+                <div class="col-2 form-group">
+                    <label for="txtPrecio">Precio: $</label>
+                    <input type="number" step="any" class="form-control" name="txtPrecio" id="txtPrecio"                     value="<?php echo $producto->precio ?>">
                 </div>
-                <div class="col-6 form-group">
-                    <label for="txtDescripcion">Teléfono:</label>
-                    <input type="number" class="form-control" name="txtDescripcion" id="txtDescripcion" value="<?php echo $producto->descripcion ?>">
+            </div>
+            <div class="row">  
+
+                <div class="col-12 form-group">
+                    <label for="txtDescripcion">Descripción:</label>
+                      <form action="[URL]" method="post">
+                        <textarea name="content" id="editor">
+                          &lt;p&gt;<?php echo $producto->descripcion ?>&lt;/p&gt;
+                        </textarea>
+                        <p type="form-control" name="txtDescripcion" id="txtDescripcion"></p>
+                      </form>
+                      <script>
+                       ClassicEditor
+                        .create( document.querySelector( '#editor' ) )
+                        .catch( error => {
+                        console.error( error );
+                        } );
+                      </script>
                 </div>
             </div>
 
@@ -293,23 +305,7 @@ if(isset($_GET["id"]) && $_GET["id"] > 0){
   </a>
 
   <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <?php include_once("logout.php")?>
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

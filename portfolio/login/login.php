@@ -1,15 +1,22 @@
 <?php
 session_start();
+include_once "config.php";
+include_once "usuario.php";
 
+$usuario = new Usuario();
 
-//$_SESSION["clave"]="admin123";
-//$clave=password_hash("admin123", PASSWORD_DEFAULT);
 
 if($_POST){
-  //$usuario =$_POST["txtUsuario"];
-  //$contra =$_POST["txtClave"];
-  if (password_verify($contra, $clave)&&($usuario=="admin")){
-    $_SESSION["nombre"]="Natalia Flores";
+  $usuario->nom_usuario =$_POST["txtUsuario"];
+  $usuario->obtenerPorNom();
+  $usuario->clave = password_hash($usuario->clave, PASSWORD_DEFAULT);
+  $clave = trim($_POST["txtClave"]);
+  if (password_verify($clave, $usuario->clave)){
+    $_SESSION["nombre"]=$usuario->nombre;
+    $_SESSION["apellido"]=$usuario->apellido;
+    $_SESSION["correo"]=$usuario->correo;
+    $_SESSION["nom_usuario"]=$usuario->nom_usuario;
+    $_SESSION["fecha"]=$usuario->fecha_ultloguin;
     header('Location: index.php');
   }else{
     $msj= "CLAVE O USARIO INCORRECTO";
@@ -30,7 +37,7 @@ if($_POST){
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Login</title>
+  <title>Login</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
